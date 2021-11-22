@@ -1,9 +1,16 @@
+# class' are like things, while modules are like tools to use on classes
+# were taking in the module crud below:
+
+require_relative 'crud'
+
 class Student
-    # accessor acts as both a getter and setter function
-    attr_accessor :first_name, :last_name, :email, :username, :password
+# make sure to include Crud module:
+include Crud
 
     # set the initialize so the object starts with all of the required information
+    attr_accessor :first_name, :last_name, :email, :username, :password
 
+    # include intialize function for all necessary attributes
     def initialize(first_name, last_name, email, username, password)
         @first_name = first_name
         @last_name = last_name
@@ -25,5 +32,9 @@ end
 
 user1 = Student.new("Daniel", "Patnode", "dbpatnode@email.com", "dbpatnode", "hkjdsakj123")
 user2 = Student.new("Meg", "Mitchell", "meg@email.com", "megamitch", "hsdjk345")
-puts user1
-puts user2
+
+hashed_password = user1.create_hash_digest(user1.password)
+puts hashed_password
+puts user1.password
+puts hashed_password == "hkjdsakj123"
+
